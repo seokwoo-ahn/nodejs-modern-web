@@ -1,7 +1,11 @@
 var fs = require('fs');
 
-var text = fs.readFileSync("test.txt", 'utf8');
-console.log(text);
+try {
+    var text = fs.readFileSync("test.txt", 'utf8');
+    console.log(text);
+} catch (e) {
+    console.log(e);
+}
 
 fs.readFile('test.txt', 'utf8', function (error, data) {
     console.log(data)
@@ -13,5 +17,9 @@ fs.writeFile('TextFileOtherWrite.txt', data, 'utf8', function (error) {
     console.log('WRITE FILE ASYNC COMPLETE')
 })
 
-fs.writeFileSync('TextFileOtherWriteSync.txt', data, 'utf8')
-console.log('WRITE FILE SYNC COMPLETE')
+try {
+    fs.writeFileSync('TextFileOtherWriteSync.txt', data, 'utf8')
+    console.log('WRITE FILE SYNC COMPLETE')
+} catch (e) {
+    console.log(e);
+}
