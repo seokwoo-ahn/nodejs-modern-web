@@ -8,13 +8,21 @@ try {
 }
 
 fs.readFile('test.txt', 'utf8', function (error, data) {
-    console.log(data)
+    if (error) {
+        console.log(error)
+    } else {
+        console.log(data)       
+    }
 })
 
 var data = "hello world!";
 
 fs.writeFile('TextFileOtherWrite.txt', data, 'utf8', function (error) {
-    console.log('WRITE FILE ASYNC COMPLETE')
+    if (error) {
+        console.log(error)
+    } else {
+        console.log('WRITE FILE ASYNC COMPLETE')        
+    }
 })
 
 try {
