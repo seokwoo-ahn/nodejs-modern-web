@@ -1,11 +1,14 @@
 var http = require('http')
+var fs = require('fs')
 
 var server = http.createServer()
 
 server.on('request', function (request, response) {
     console.log('Request on')
-    response.writeHead(200, { 'Content-Type': 'text/html'})
-    response.end('<h1>Hello Web Server with Node.js</h1>')
+    fs.readFile('HTMLPage.html', function (error, data){
+        response.writeHead(200, { 'Content-Type': 'text/html'})
+        response.end(data)
+    })
 })
 
 server.on('connection', function () {
