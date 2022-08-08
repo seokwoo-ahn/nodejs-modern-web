@@ -4,6 +4,9 @@ process.on('exit', function () {
 
 process.emit('exit')
 process.emit('exit')
+
+process.exit()
+
 process.emit('exit')
 process.emit('exit')
 
