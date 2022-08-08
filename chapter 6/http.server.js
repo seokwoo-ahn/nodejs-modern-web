@@ -1,7 +1,18 @@
 var http = require('http')
 var fs = require('fs')
 
-var server = http.createServer()
+var server = http.createServer(function (request, response){
+    var date = new Date()
+    date.setDate(date.getDate() + 7)
+
+    response.writeHead(200, {
+        'Set-Cookie': [
+            'IZONE = chaewon;Expires = ' + date.toUTCString(),
+            'cran = berry'
+        ]
+    })
+    response.end('<h1>' + request.headers.cookie + '</h1>')
+})
 
 server.on('request', function (request, response) {
     console.log('Request on')
@@ -22,7 +33,3 @@ server.on('close', function () {
 server.listen(52273, function () {
     console.log('server running at http://localhost:52273')
 })
-
-setInterval(function () {
-    server.close()
-}, 10000)
