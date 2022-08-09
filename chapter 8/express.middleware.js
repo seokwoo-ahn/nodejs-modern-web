@@ -1,11 +1,33 @@
 var http = require('http')
 var express = require('express')
 var morgan = require('morgan')
+var cookieParser = require('cookie-parser')
 
 var app = express()
 
 app.use(morgan('combined'))
 app.use(express.static(__dirname + '/static'))
+app.use(cookieParser())
+
+app.get('/getCookie', function (request, response) {
+    response.send(request.cookies)
+})
+
+app.get('/setCookie', function (request, response) {
+    var name = request.query.name
+    var property = request.query.property
+    
+    console.log(name)
+    console.log(property)
+
+    response.cookie('string', 'cookie')
+    response.cookie('json', {
+        name: name,
+        property: property
+    })
+
+    response.redirect('/getCookie')
+})
 
 app.get('/image', function (request, response) {
     response.writeHead(200, {'Content-Type': 'text/html'})
