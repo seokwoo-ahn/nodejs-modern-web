@@ -65,7 +65,18 @@ app.post('/user', function (request, response) {
         throw new Error("error")
     }
 })
-app.put('/user/:id', function (request, response) {})
+
+app.put('/user/:id', function (request, response) {
+    var id = request.params.id
+    var name = request.body.name
+    var region = request.body.region
+
+    var item = DummyDB.get(id)
+    item.name = name || item.name
+    item.region = region || item.region
+
+    response.send(item)
+})
 app.delete('/user/:id', function (request, response) {})
 
 app.listen(52273, function () {
