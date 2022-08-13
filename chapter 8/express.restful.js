@@ -5,7 +5,7 @@ var bodyParser = require('body-parser')
 
 var DummyDB = (function () {
     var DummyDB = {}
-    var storage = {}
+    var storage = []
     var count = 1
 
     DummyDB.get = function (id) {
@@ -44,9 +44,27 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
-app.get('/user', function (request, response) {})
-app.get('/user/:id', function (request, response) {})
-app.post('/user', function (request, response) {})
+app.get('/user', function (request, response) {
+    response.send(DummyDB.get())
+})
+
+app.get('/user/:id', function (request, response) {
+    response.send(DummyDB.get(request.params.id))
+})
+
+app.post('/user', function (request, response) {
+    var name = request.body.name
+    var region = request.body.region
+
+    if(name && region) {
+        response.send(DummyDB.insert({
+            name : name,
+            region: region
+        }))
+    } else {
+        throw new Error("error")
+    }
+})
 app.put('/user/:id', function (request, response) {})
 app.delete('/user/:id', function (request, response) {})
 
