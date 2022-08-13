@@ -77,7 +77,10 @@ app.put('/user/:id', function (request, response) {
 
     response.send(item)
 })
-app.delete('/user/:id', function (request, response) {})
+
+app.delete('/user/:id', function (request, response) {
+    response.send(DummyDB.remove(request.params.id))
+})
 
 app.listen(52273, function () {
     console.log('server running at localhost:52273')
