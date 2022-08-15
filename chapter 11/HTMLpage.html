@@ -15,7 +15,11 @@
                 })
 
                 socket.on('broadcastmsg', function(data) {
-                    alert('broad cast data: ' + data)
+                    alert('broadcast data: ' + data)
+                })
+                
+                socket.on('privatemsg', function(data) {
+                    alert('private data: ' + data)
                 })
 
                 document.getElementById('button').onclick = function() {
@@ -32,6 +36,11 @@
                     var text = document.getElementById('broadcasttext').value
                     socket.emit('broadcast', text)
                 }
+                
+                document.getElementById('privatebutton').onclick = function() {
+                    var text = document.getElementById('privatetext').value
+                    socket.emit('private', text)
+                }
             }
         </script>
     </head>
@@ -44,5 +53,8 @@
         <br>
         <input type="text" id="broadcasttext" />
         <input type="button" id="broadcastbutton" value="broadcast" />
+        <br>
+        <input type="text" id="privatetext" />
+        <input type="button" id="privatebutton" value="private" />
     </body>
 </html>

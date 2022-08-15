@@ -11,10 +11,13 @@ var server = http.createServer(function (request, response) {
     console.log('server running at localhost:52273')
 })
 
+var id = 0
 var io = socketio(server)
 
 io.on('connection', function (socket) {
     console.log("socket connected")
+    id = socket.id
+    console.log("connected id: " + id)
     
     socket.on('name', function(data) {
         console.log('Client Send Data:', data)
@@ -30,5 +33,10 @@ io.on('connection', function (socket) {
     socket.on('broadcast', function(data) {
         console.log('broadcast Send Data:', data)
         socket.broadcast.emit('broadcastmsg', data)
+    })
+
+    socket.on('private', function(data) {
+        console.log('private Send Data:', data)
+        socket.to(id).emit('privatemsg', data)
     })
 })
