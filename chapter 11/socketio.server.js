@@ -26,4 +26,9 @@ io.on('connection', function (socket) {
         console.log('public Send Data:', data)
         io.sockets.emit('publicmsg', data)
     })
+
+    socket.on('broadcast', function(data) {
+        console.log('broadcast Send Data:', data)
+        socket.broadcast.emit('broadcastmsg', data)
+    })
 })

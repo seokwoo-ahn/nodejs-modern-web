@@ -14,6 +14,10 @@
                     alert('public data: ' + data)
                 })
 
+                socket.on('broadcastmsg', function(data) {
+                    alert('broad cast data: ' + data)
+                })
+
                 document.getElementById('button').onclick = function() {
                     var text = document.getElementById('text').value
                     socket.emit('name', text)
@@ -22,6 +26,11 @@
                 document.getElementById('publicbutton').onclick = function() {
                     var text = document.getElementById('publictext').value
                     socket.emit('public', text)
+                }
+
+                document.getElementById('broadcastbutton').onclick = function() {
+                    var text = document.getElementById('broadcasttext').value
+                    socket.emit('broadcast', text)
                 }
             }
         </script>
@@ -32,5 +41,8 @@
         <br>
         <input type="text" id="publictext" />
         <input type="button" id="publicbutton" value="public" />
+        <br>
+        <input type="text" id="broadcasttext" />
+        <input type="button" id="broadcastbutton" value="broadcast" />
     </body>
 </html>
