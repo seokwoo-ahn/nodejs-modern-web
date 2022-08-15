@@ -10,9 +10,18 @@
                     alert(data)
                 })
 
+                socket.on('publicmsg', function (data) {
+                    alert('public data: ' + data)
+                })
+
                 document.getElementById('button').onclick = function() {
                     var text = document.getElementById('text').value
                     socket.emit('name', text)
+                }
+
+                document.getElementById('publicbutton').onclick = function() {
+                    var text = document.getElementById('publictext').value
+                    socket.emit('public', text)
                 }
             }
         </script>
@@ -20,5 +29,8 @@
     <body>
         <input type="text" id="text" />
         <input type="button" id="button" value="echo" />
+        <br>
+        <input type="text" id="publictext" />
+        <input type="button" id="publicbutton" value="public" />
     </body>
 </html>
