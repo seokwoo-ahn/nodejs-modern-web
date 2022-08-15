@@ -4,10 +4,21 @@
         <script src="/socket.io/socket.io.js"></script>
         <script>
             window.onload = function() {
-                var socket = io.connect();
+                var socket = io.connect()
+                
+                socket.on('msg', function (data) {
+                    alert(data)
+                })
+
+                document.getElementById('button').onclick = function() {
+                    var text = document.getElementById('text').value
+                    socket.emit('name', text)
+                }
             }
         </script>
     </head>
     <body>
+        <input type="text" id="text" />
+        <input type="button" id="button" value="echo" />
     </body>
 </html>

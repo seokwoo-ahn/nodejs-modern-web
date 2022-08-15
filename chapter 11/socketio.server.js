@@ -12,6 +12,13 @@ var server = http.createServer(function (request, response) {
 })
 
 var io = socketio(server)
+
 io.on('connection', function (socket) {
     console.log("socket connected")
+    
+    socket.on('name', function(data) {
+        console.log('Client Send Data:', data)
+
+        socket.emit('msg', data)
+    })
 })
